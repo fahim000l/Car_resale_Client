@@ -16,13 +16,16 @@ const ProductCategories = () => {
     }
 
     return (
-        <div className='mt-10 grid lg:grid-cols-4 grid-cols-1 gap-5'>
-            {
-                categories.map(category => <CategoryCard
-                    key={category._id}
-                    category={category}
-                ></CategoryCard>)
-            }
+        <div className='mt-10'>
+            <p className='text-5xl font-bold text-start mb-5 text-white'>Categories</p>
+            <div className='grid lg:grid-cols-4 grid-cols-1 gap-5'>
+                {
+                    categories.map(category => <CategoryCard
+                        key={category._id}
+                        category={category}
+                    ></CategoryCard>)
+                }
+            </div>
         </div>
     );
 };

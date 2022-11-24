@@ -24,7 +24,7 @@ const Header = () => {
                         }
                     </ul>
                 </div>
-                <NavLink to={'/'} className="btn btn-ghost normal-case text-xl font-bold"><span className='bg-black px-5 py-2 rounded-lg text-white font-bold'>Car Resale</span> <span className='text-black text-3xl'>.com</span></NavLink>
+                <NavLink to={'/'} className="btn btn-ghost normal-case text-xl font-bold"><span className='bg-black px-5 py-2 rounded-lg text-white font-bold'>Car Resale</span> <span className='text-black lg:first-letter:text-3xl'>.com</span></NavLink>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">

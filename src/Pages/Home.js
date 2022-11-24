@@ -5,7 +5,7 @@ import ProductCategories from './ProductCategories/ProductCategories';
 
 const Home = () => {
     return (
-        <div className='w-[90%] mx-auto'>
+        <div className='lg:w-[90%] px-[10px] lg:px-0 lg:mx-auto'>
             <Carousel></Carousel>
             <ProductCategories></ProductCategories>
             <IntroCard></IntroCard>
