@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../Contexts/AuthProvider';
 
 const SignUp = () => {
 
     const imageBBSecret = process.env.REACT_APP_image_bb_secret;
 
+    const { createUser, googleSignIn, updateUserProfile } = useContext(AuthContext);
+
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSignUp = (event) => {
         event.preventDefault();
+        setError('')
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
@@ -14,8 +22,14 @@ const SignUp = () => {
         const password = form.password.value;
         const image = form.image.files[0];
 
+        if (password.length < 6) {
+            setError('Password must contain at least 6 characters');
+            return;
+        }
+
         const formData = new FormData();
         formData.append('image', image);
+
 
         fetch(`https://api.imgbb.com/1/upload?key=${imageBBSecret}`, {
             method: 'POST',
@@ -29,9 +43,71 @@ const SignUp = () => {
                     name,
                     email,
                     role,
-                    password,
                     image: imageData.data.url
                 };
+
+                createUser(userInfo.email, password)
+                    .then(result => {
+                        const user = result.user;
+                        console.log(user);
+                        setUserProfile(userInfo.name, userInfo.image);
+                        saveUserToDb(userInfo);
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        setError(err.message);
+                    });
+            });
+    };
+
+    const setUserProfile = (name, photoUrl) => {
+
+        const profile = {
+            displayName: name,
+            photoURL: photoUrl
+        }
+
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch(err => {
+                console.error(error);
+                setError(err.message);
+            })
+    }
+
+    const saveUserToDb = (userInfo) => {
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(userInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    Swal.fire('Your account has been created successfully');
+                    navigate('/');
+                }
+            })
+    };
+
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                const userInfo = {
+                    name: user.displayName,
+                    email: user.email,
+                    role: 'buyer',
+                    image: user.photoURL
+                };
+                saveUserToDb(userInfo);
+            })
+            .catch(err => {
+                console.error(err);
             });
     }
 
@@ -44,29 +120,33 @@ const SignUp = () => {
                     <form onSubmit={handleSignUp} className="self-stretch space-y-3 ng-untouched ng-pristine ng-valid mt-5">
                         <div className='text-start'>
                             <label className='font-bold text-xl'>Your name</label>
-                            <input name='name' type="text" placeholder="Your name" className="w-full rounded-md focus:ring focus:ring-violet-400 border-gray-700 p-2 mt-2" />
+                            <input required name='name' type="text" placeholder="Your name" className="w-full rounded-md focus:ring focus:ring-violet-400 border-gray-700 p-2 mt-2" />
                         </div>
                         <div className='text-start'>
                             <label className='font-bold text-xl'>Your Email</label>
-                            <input name='email' type="email" placeholder="Your Email" className="w-full rounded-md focus:ring focus:ring-violet-400 border-gray-700 p-2 mt-2" />
+                            <input required name='email' type="email" placeholder="Your Email" className="w-full rounded-md focus:ring focus:ring-violet-400 border-gray-700 p-2 mt-2" />
                         </div>
                         <div className='text-start'>
                             <label className='font-bold text-xl mb-2'>Your Role</label>
-                            <select name='role' className="select select-bordered w-full">
+                            <select required name='role' className="select select-bordered w-full">
                                 <option defaultValue>Buyer</option>
                                 <option>Seller</option>
                             </select>
                         </div>
                         <div className='text-start'>
                             <label className='font-bold text-xl'>Password</label>
-                            <input name='password' type="password" placeholder="Password" className="w-full rounded-md focus:ring focus:ring-violet-400 border-gray-700 p-2 mt-2" />
+                            <input required name='password' type="password" placeholder="Password" className="w-full rounded-md focus:ring focus:ring-violet-400 border-gray-700 p-2 mt-2" />
                         </div>
                         <div className='text-start'>
                             <label className='font-bold text-xl'>Upload Your Profile Pic</label>
-                            <input name='image' type="file" className="file-input w-full mt-2" />
+                            <input required name='image' type="file" className="file-input w-full mt-2" />
                         </div>
+                        <p className='text-xl my-2 text-red-600 text-start'>{error}</p>
                         <button type="submit" className="w-full py-2 font-semibold rounded bg-violet-400 text-gray-900">Sign Up</button>
                     </form>
+                    <div className="divider my-5">OR</div>
+                    <button onClick={handleGoogleSignIn} className='btn w-full text-white lg:text-xl'>SignIn with Google</button>
+                    <p className='text-violet-400'>Already have and account? <button onClick={() => navigate('/signin')} className='btn btn-link'>Sign In</button> </p>
                 </div>
                 <img src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg?w=2000" alt="" className="object-cover w-full rounded-md xl:col-span-3 bg-gray-500" />
             </div>
