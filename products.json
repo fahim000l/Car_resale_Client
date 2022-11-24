@@ -7,7 +7,7 @@
         "yearOfUse": 5,
         "postedTime": "time",
         "sellerName": "Otho Estevez",
-        "isVerified": "Male",
+        "isVerified": true,
         "categoryName": "Fancy Car",
         "categoryId": "637f005843fb22f0f9df4934",
         "picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/2nd-Mitsubishi-Diamante.jpg/280px-2nd-Mitsubishi-Diamante.jpg"
@@ -20,7 +20,7 @@
         "yearOfUse": 3,
         "postedTime": "time",
         "sellerName": "Romain Willerson",
-        "isVerified": "Male",
+        "isVerified": true,
         "categoryName": "Micro Bus",
         "categoryId": "637f005843fb22f0f9df4936",
         "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDDTlT9hOz6lJ30uE2DD_iXSw0Q8rR4IZ4y3VEPcSPmM_8V4JxG0IKzjCojc1w4YkO-Is&usqp=CAU"
@@ -33,7 +33,7 @@
         "yearOfUse": 2,
         "postedTime": "time",
         "sellerName": "Silva Biggs",
-        "isVerified": "Female",
+        "isVerified": false,
         "categoryName": "Family Car",
         "categoryId": "637f005843fb22f0f9df4933",
         "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQDiLRMjA07mc4_8wpYqt6Z_tfZnDO7NAi5FVCNNgzX7oR1QOj46U_PlitC0j-UxRm4ck&usqp=CAU"
@@ -46,7 +46,7 @@
         "yearOfUse": 9,
         "postedTime": "time",
         "sellerName": "Julie Forcer",
-        "isVerified": "Female",
+        "isVerified": false,
         "categoryName": "Truck",
         "categoryId": "637f005843fb22f0f9df4935",
         "picture": "https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/vehicles/2022/trucks/silverado-hd/colorizer/01-images/2022-silverado2500637f005843fb22f0f9df49350"
@@ -59,7 +59,7 @@
         "yearOfUse": 5,
         "postedTime": "time",
         "sellerName": "Grazia Rebeiro",
-        "isVerified": "Female",
+        "isVerified": false,
         "categoryName": "Fancy Car",
         "categoryId": "637f005843fb22f0f9df4934",
         "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS30baYTmj2_6LkYQItbOxjHNySZMnYrwF0THsbDL_KxECL825acTKKlFvCbDs874sdn9Y&usqp=CAU"
@@ -72,7 +72,7 @@
         "yearOfUse": 5,
         "postedTime": "time",
         "sellerName": "Walliw Ralestone",
-        "isVerified": "Female",
+        "isVerified": false,
         "categoryName": "Fancy Car",
         "categoryId": "637f005843fb22f0f9df4934",
         "picture": "https://www.carscoops.com/wp-content/uploads/2022/05/1956-Ford-Thunderbird.jpg"
@@ -85,7 +85,7 @@
         "yearOfUse": 2,
         "postedTime": "time",
         "sellerName": "Miner Phillps",
-        "isVerified": "Male",
+        "isVerified": true,
         "categoryName": "Micro Bus",
         "categoryId": "637f005843fb22f0f9df4936",
         "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjy1JPNkje9urD5MBjTHXwcLKJu3Cjkjavc3EB-RJ3W7sktpdrnWWsIv3qMncAhhgaBB4&usqp=CAU"
@@ -98,7 +98,7 @@
         "yearOfUse": 3,
         "postedTime": "time",
         "sellerName": "Kenneth Diter",
-        "isVerified": "Male",
+        "isVerified": true,
         "categoryName": "Fancy Car",
         "categoryId": "637f005843fb22f0f9df4934",
         "picture": "https://img.kyodonews.net/english/public/images/posts/9ccc101cfc84ace58876aab71f79515c/cropped_image_l.jpg"
@@ -111,7 +111,7 @@
         "yearOfUse": 8,
         "postedTime": "time",
         "sellerName": "Dorolisa MacTurlough",
-        "isVerified": "Female",
+        "isVerified": false,
         "categoryName": "Truck",
         "categoryId": "637f005843fb22f0f9df4935",
         "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu3yoAD83HeV1tyolY--VWoGYWt9LmdDQ68Mmf_9ROqbzcHeJh8KzfvvdzedfzvzGKtGY&usqp=CAU"
@@ -124,7 +124,7 @@
         "yearOfUse": 7,
         "postedTime": "time",
         "sellerName": "Fonzie Genty",
-        "isVerified": "Male",
+        "isVerified": true,
         "categoryName": "Family Car",
         "categoryId": "637f005843fb22f0f9df4933",
         "picture": "https://upload.wikimedia.org/wikipedia/commons/5/57/2012_Chevrolet_Aveo_LTZ_1.4_Front.jpg"
@@ -137,7 +137,7 @@
         "yearOfUse": 2,
         "postedTime": "time",
         "sellerName": "Melanie Grievson",
-        "isVerified": "Female",
+        "isVerified": false,
         "categoryName": "Fancy Car",
         "categoryId": "637f005843fb22f0f9df4934",
         "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmJ2_IJEoaAe1DJ35dhcs6rLWs4hyUw_2VJxhGq3oZBdgdfKcy2v6bL31J11NdzjK8Jcw&usqp=CAU"
@@ -150,7 +150,7 @@
         "yearOfUse": 5,
         "postedTime": "time",
         "sellerName": "Laurena Willshere",
-        "isVerified": "Female",
+        "isVerified": false,
         "categoryName": "Fancy Car",
         "categoryId": "637f005843fb22f0f9df4934",
         "picture": "https://media.evo.co.uk/image/upload/v1579014015/evo/2020/01/010-prelude-mk3.jpg"
@@ -163,7 +163,7 @@
         "yearOfUse": 7,
         "postedTime": "time",
         "sellerName": "Connie De Beauchemp",
-        "isVerified": "Male",
+        "isVerified": true,
         "categoryName": "Family Car",
         "categoryId": "637f005843fb22f0f9df4933",
         "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJVoZz4VdpziKcmJgt9o7NgtDURBbu51ZbqQ&usqp=CAU"
@@ -176,7 +176,7 @@
         "yearOfUse": 5,
         "postedTime": "time",
         "sellerName": "Carmella Petrovic",
-        "isVerified": "Female",
+        "isVerified": false,
         "categoryName": "Family Car",
         "categoryId": "637f005843fb22f0f9df4933",
         "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQj2Xn2opXjBUws3q9zj2mEEN-yTqQTgxSq-DGuUKe0-g9MEX6GpSsC9lH5nUteUUw6Ak&usqp=CAU"
@@ -189,7 +189,7 @@
         "yearOfUse": 4,
         "postedTime": "time",
         "sellerName": "Michel Slocombe",
-        "isVerified": "Female",
+        "isVerified": false,
         "categoryName": "Fancy Car",
         "categoryId": "637f005843fb22f0f9df4934",
         "picture": "https://content-images.carmax.com/qeontfmijmzv/28EF41F69B152E978B902DEB8CAE24BB42DBF872/495a118e2b33385a5e58dde1bed6b273/166604-rtb-acuratl-651x366.jpg"
@@ -202,7 +202,7 @@
         "yearOfUse": 6,
         "postedTime": "time",
         "sellerName": "Reynolds Gladdifh",
-        "isVerified": "Male",
+        "isVerified": true,
         "categoryName": "Truck",
         "categoryId": "637f005843fb22f0f9df4935",
         "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX546zdftMWDltzkb5Lr0HUsSua5qVplaj0ztN8crmKIe0IStIA6fWF-VnXYtvW3YZokA&usqp=CAU"
@@ -215,7 +215,7 @@
         "yearOfUse": 9,
         "postedTime": "time",
         "sellerName": "Sheree Badland",
-        "isVerified": "Female",
+        "isVerified": false,
         "categoryName": "Fancy Car",
         "categoryId": "637f005843fb22f0f9df4934",
         "picture": "https://www.mtaq.com.au/wp-content/uploads/2021/06/Classic-supercar-Dodge-Viper-RT-10-Concept.jpg"
@@ -228,7 +228,7 @@
         "yearOfUse": 1,
         "postedTime": "time",
         "sellerName": "Cecilia Philippet",
-        "isVerified": "Female",
+        "isVerified": false,
         "categoryName": "Micro Bus",
         "categoryId": "637f005843fb22f0f9df4936",
         "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN663C9d_cGUd34B8-q00STszw8IEEGAfuSj-7MxuImv1zI7ajNxHVqbPiY9bovgqkjWw&usqp=CAU"
@@ -241,7 +241,7 @@
         "yearOfUse": 2,
         "postedTime": "time",
         "sellerName": "Estel Shera",
-        "isVerified": "Female",
+        "isVerified": false,
         "categoryName": "Family Car",
         "categoryId": "637f005843fb22f0f9df4933",
         "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVGVH0JLvXcWBTJgnAGm7Z1lVvgK_n4nEVFUIWAuxEZsKxbZxe6n1CK0KWyo9-Ga-3otw&usqp=CAU"
@@ -254,7 +254,7 @@
         "yearOfUse": 4,
         "postedTime": "time",
         "sellerName": "Minne Duffy",
-        "isVerified": "Female",
+        "isVerified": false,
         "categoryName": "Fancy Car",
         "categoryId": "637f005843fb22f0f9df4934",
         "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQje_dtaOELZJPNREYKRZvaEb02MHLqHgIolg&usqp=CAU"
