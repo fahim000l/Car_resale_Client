@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import Loader from '../../CustomComponents/Loader';
 import ProductCard from './ProductCard/ProductCard';
 
 const CategoryProducts = () => {
@@ -13,6 +14,11 @@ const CategoryProducts = () => {
             .then(res => res.json())
     });
     console.log(products);
+
+    if (isLoading) {
+        return <Loader></Loader>
+    }
+
 
     return (
         <div className='my-10 lg:w-[90%] px-[10px] lg:px-0 lg:mx-auto'>
