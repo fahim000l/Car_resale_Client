@@ -16,9 +16,12 @@ const ProductCategories = () => {
     }
 
     return (
-        <div className='mt-10'>
+        <div className='mt-10 grid lg:grid-cols-4 grid-cols-1 gap-5'>
             {
-                categories.map(category => <CategoryCard></CategoryCard>)
+                categories.map(category => <CategoryCard
+                    key={category._id}
+                    category={category}
+                ></CategoryCard>)
             }
         </div>
     );
