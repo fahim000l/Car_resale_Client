@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AuthProvider from './Contexts/AuthProvider';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const queryClient = new QueryClient();
 

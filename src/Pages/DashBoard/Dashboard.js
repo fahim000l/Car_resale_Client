@@ -28,12 +28,12 @@ const Dashboard = () => {
                         {
                             role === 'Seller' ?
                                 <>
-                                    <li><Link to={'/dashboard'}>Add Product</Link></li>
-                                    <li><Link to={'/dashboard'}>My Products</Link></li>
+                                    <li><Link to={'/dashboard/addproducts'}>Add Product</Link></li>
+                                    <li><Link to={'/dashboard/myproducts'}>My Products</Link></li>
                                     <li><Link to={'/dashboard'}>My Buyers</Link></li>
                                 </>
                                 :
-                                <li><Link to={'/dashboard'}>My Orders</Link></li>
+                                <li><Link to={'/dashboard/myorders'}>My Orders</Link></li>
                         }
                     </ul>
 

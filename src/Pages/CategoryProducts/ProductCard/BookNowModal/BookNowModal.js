@@ -6,6 +6,7 @@ const BookNowModal = ({ bookingProduct, setBookingProduct }) => {
 
     const { user } = useContext(AuthContext);
     const {
+        _id,
         carName,
         resalePrice,
         picture
@@ -21,6 +22,7 @@ const BookNowModal = ({ bookingProduct, setBookingProduct }) => {
         const price = form.price.value;
         const phoneNumber = form.phoneNumber.value;
         const meetingLocation = form.meetingLocation.value;
+        const productId = _id;
 
         const bookingInfo = {
             clientName,
@@ -29,7 +31,8 @@ const BookNowModal = ({ bookingProduct, setBookingProduct }) => {
             price,
             phoneNumber,
             meetingLocation,
-            picture
+            picture,
+            productId
         };
 
         fetch('http://localhost:5000/bookings', {
