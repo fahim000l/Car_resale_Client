@@ -1,10 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Loader from '../../CustomComponents/Loader';
+import BookNowModal from './ProductCard/BookNowModal/BookNowModal';
 import ProductCard from './ProductCard/ProductCard';
 
 const CategoryProducts = () => {
+
+    const [bookingProduct, setBookingProduct] = useState(null);
+
 
     const id = useParams().id;
     console.log(id);
@@ -28,9 +32,17 @@ const CategoryProducts = () => {
                     products.map(product => <ProductCard
                         key={product._id}
                         product={product}
+                        setBookingProduct={setBookingProduct}
                     ></ProductCard>)
                 }
             </div>
+            {
+                bookingProduct &&
+                <BookNowModal
+                    bookingProduct={bookingProduct}
+                    setBookingProduct={setBookingProduct}
+                ></BookNowModal>
+            }
         </div>
     );
 };
