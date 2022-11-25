@@ -30,6 +30,8 @@ const SignIn = () => {
     return (
         <section className="p-6 bg-gray-800 text-gray-100">
             <div className="container grid gap-6 mx-auto text-center lg:grid-cols-2 xl:grid-cols-5">
+
+                <img src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg?w=2000" alt="" className="object-cover w-full rounded-md xl:col-span-3 bg-gray-500" />
                 <div className="w-full px-6 py-16 rounded-md sm:px-12 md:px-16 xl:col-span-2 bg-gray-900">
                     <span className="block mb-2 text-violet-400">Log Into your Account</span>
                     <h1 className="text-5xl font-extrabold text-gray-50">Sign In</h1>
@@ -47,7 +49,6 @@ const SignIn = () => {
                     </form>
                     <p className='text-violet-400'>Does not have and account? <button onClick={() => navigate('/signup')} className='btn btn-link'>Sign Up</button> </p>
                 </div>
-                <img src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg?w=2000" alt="" className="object-cover w-full rounded-md xl:col-span-3 bg-gray-500" />
             </div>
         </section>
     );
