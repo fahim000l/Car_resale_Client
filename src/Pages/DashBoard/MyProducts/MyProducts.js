@@ -21,6 +21,7 @@ const MyProducts = () => {
     };
 
     const handleDelete = (deletingProduct) => {
+
         confirmAlert({
             title: 'Confirm to Delete',
             message: 'Are you sure? You want to delete this product.',
@@ -37,6 +38,50 @@ const MyProducts = () => {
                                 if (data.acknowledged) {
                                     refetch();
                                     toast.success('Item deleted successfully');
+                                }
+                            })
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => {
+                        return;
+                    }
+                }
+            ]
+        });
+    };
+
+    const handleAdvertise = (product) => {
+
+        const { _id, picture, carName, resalePrice } = product;
+
+        const advertisingProduct = {
+            productId: _id,
+            picture,
+            carName,
+            resalePrice
+        }
+
+        confirmAlert({
+            title: 'Confirm to Advertise',
+            message: 'Are you sure? You want to advertise this product.',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        fetch(`http://localhost:5000/advertisingProducts`, {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(advertisingProduct)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                                if (data.acknowledged) {
+                                    toast.success('product advertised Successfully');
                                 }
                             })
                     }
@@ -76,6 +121,7 @@ const MyProducts = () => {
                                 key={myProduct._id}
                                 myProduct={myProduct}
                                 handleDelete={handleDelete}
+                                handleAdvertise={handleAdvertise}
                             ></MyProductsRow>)
                         }
                     </tbody>

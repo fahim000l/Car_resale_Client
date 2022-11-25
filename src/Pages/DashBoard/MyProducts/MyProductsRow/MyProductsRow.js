@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import Loader from '../../../../CustomComponents/Loader';
 
-const MyProductsRow = ({ myProduct, decimal, handleDelete }) => {
+const MyProductsRow = ({ myProduct, decimal, handleDelete, handleAdvertise }) => {
 
     const { _id, picture, carName, resalePrice } = myProduct;
 
@@ -43,7 +43,7 @@ const MyProductsRow = ({ myProduct, decimal, handleDelete }) => {
                 <div className={`font-bold text-center text-black rounded-lg ${data?.message === 'alreadyBooked' ? 'bg-yellow-600' : 'bg-green-500'}`}>{data?.message === 'alreadyBooked' ? 'Booked' : 'Available'}</div>
             </td>
             <th>
-                <button className="btn btn-secondary btn-xs font-bold text-black">Advertise</button>
+                <button onClick={() => handleAdvertise(myProduct)} disabled={data?.message === 'alreadyBooked'} className="btn btn-secondary btn-xs font-bold text-black">Advertise</button>
             </th>
         </tr>
     );
