@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 import { FaUserAlt } from 'react-icons/fa';
 import logo from '../assets/logo.jpg'
@@ -7,6 +7,9 @@ import logo from '../assets/logo.jpg'
 const Header = () => {
 
     const { user, logOut } = useContext(AuthContext);
+
+    const location = useLocation();
+    console.log(location);
 
     const handleSignOut = () => {
         logOut()
@@ -17,13 +20,16 @@ const Header = () => {
     }
 
     const navItems = <>
-        <li><NavLink className={'font-bold lg:text-black text-xl rounded-lg'} to={'/'}>Home</NavLink></li>
-        <li><NavLink className={'font-bold lg:text-black text-xl rounded-lg'} to={'/blog'}>Blog</NavLink></li>
+        <li><NavLink className={'font-bold lg:text-black text-xl rounded-lg lg:mr-2 mt-2 lg:mt-0'} to={'/'}>Home</NavLink></li>
+        <li><NavLink className={'font-bold lg:text-black text-xl rounded-lg lg:mr-2 mt-2 lg:mt-0'} to={'/blog'}>Blog</NavLink></li>
         {
             user?.uid ?
-                <li><button onClick={handleSignOut} className={'btn  font-bold text-xl rounded-lg'}>Sign Out</button></li>
+                <>
+                    <li><NavLink className={'font-bold lg:text-black text-xl rounded-lg lg:mr-2 mt-2 lg:mt-0'} to={'/dashboard'}>Dashboard </NavLink></li>
+                    <li><button onClick={handleSignOut} className={'btn  font-bold text-xl rounded-lg lg:mr-2 mt-2 lg:mt-0'}>Sign Out</button></li>
+                </>
                 :
-                <li><NavLink className={'font-bold lg:text-black text-xl rounded-lg'} to={'/signin'}>Sign In</NavLink></li>
+                <li><NavLink className={'font-bold lg:text-black text-xl rounded-lg lg:mr-2 mt-2 lg:mt-0'} to={'/signin'}>Sign In</NavLink></li>
         }
     </>
 
@@ -45,6 +51,9 @@ const Header = () => {
                     <img className='lg:w-[60px] w-[30px] h-[30px] lg:h-[60px] rounded-full' src={logo} alt="" />
                 </NavLink>
             </div>
+            <button className={`btn btn-primary lg:hidden ${location.pathname.includes('/dashboard') ? 'block' : 'hidden'}`}>
+                <label htmlFor="dashboardDrawer" className={`drawer-button`}>Nevigate</label>
+            </button>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
                     {

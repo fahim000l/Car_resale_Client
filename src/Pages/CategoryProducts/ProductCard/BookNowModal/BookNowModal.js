@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
 
 const BookNowModal = ({ bookingProduct, setBookingProduct }) => {
@@ -6,13 +7,7 @@ const BookNowModal = ({ bookingProduct, setBookingProduct }) => {
     const { user } = useContext(AuthContext);
     const {
         carName,
-        location,
         resalePrice,
-        originalPrice,
-        yearOfUse,
-        postedTime,
-        sellerName,
-        isVerified,
         picture
     } = bookingProduct;
 
@@ -35,10 +30,23 @@ const BookNowModal = ({ bookingProduct, setBookingProduct }) => {
             phoneNumber,
             meetingLocation,
             picture
-        }
+        };
 
-        console.log(bookingInfo);
-
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bookingInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success('Your order has been confirmed');
+                    setBookingProduct(null);
+                }
+            })
     }
 
 
