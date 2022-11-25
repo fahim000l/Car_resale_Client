@@ -1,12 +1,17 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
 const SignIn = () => {
 
     const [error, setError] = useState('');
+    const [userEmail, setUserEmail] = useState('');
     const navigate = useNavigate();
-    const { signIn } = useContext(AuthContext);
+    const { signIn, passwordReset } = useContext(AuthContext);
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/'
+
 
     const handleSignIn = (event) => {
         event.preventDefault();
@@ -20,10 +25,27 @@ const SignIn = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                navigate(from, { replace: true });
             })
             .catch(err => {
                 console.error(err);
                 setError(err.message);
+            })
+    };
+
+    const resetPassword = () => {
+
+        if (!userEmail) {
+            setError('Please provide your email');
+            return;
+        };
+        passwordReset(userEmail)
+            .then((result) => {
+                console.log(result);
+            })
+            .catch(err => {
+                console.error(err);
+                setError(err);
             })
     }
 
@@ -38,11 +60,12 @@ const SignIn = () => {
                     <form onSubmit={handleSignIn} className="self-stretch space-y-3 ng-untouched ng-pristine ng-valid mt-5">
                         <div className='text-start'>
                             <label className='font-bold text-xl'>Your Email</label>
-                            <input required name='email' type="email" placeholder="Your Email" className="w-full rounded-md focus:ring focus:ring-violet-400 border-gray-700 p-2 mt-2" />
+                            <input onBlur={(event) => setUserEmail(event.target.value)} required name='email' type="email" placeholder="Your Email" className="w-full rounded-md focus:ring focus:ring-violet-400 border-gray-700 p-2 mt-2" />
                         </div>
                         <div className='text-start'>
                             <label className='font-bold text-xl'>Password</label>
                             <input required name='password' type="password" placeholder="Password" className="w-full rounded-md focus:ring focus:ring-violet-400 border-gray-700 p-2 mt-2" />
+                            <p className='text-violet-400 text-start'>Forgot password? <span onClick={resetPassword} className='btn btn-link'>Reset</span></p>
                         </div>
                         <p className='text-xl my-2 text-red-600 text-start'>{error}</p>
                         <button type="submit" className="w-full py-2 font-semibold rounded bg-violet-400 text-gray-900">Sign In</button>
