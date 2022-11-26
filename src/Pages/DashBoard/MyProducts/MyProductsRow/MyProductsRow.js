@@ -1,16 +1,34 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Loader from '../../../../CustomComponents/Loader';
 
 const MyProductsRow = ({ myProduct, decimal, handleDelete, handleAdvertise }) => {
 
     const { _id, picture, carName, resalePrice } = myProduct;
+    // const [advertisedMessage, setAdvertisedMessage] = useState('');
 
-    const { data, isLoading } = useQuery({
+    const { data: isOrdered, isLoading } = useQuery({
         queryKey: ['products', _id],
         queryFn: () => fetch(`http://localhost:5000/products/${_id}`)
             .then(res => res.json())
     });
+    const { data: isAdvertised } = useQuery({
+        queryKey: ['advertisingProducts', _id],
+        queryFn: () => fetch(`http://localhost:5000/advertisingProducts?productId=${_id}`)
+            .then(res => res.json())
+    });
+
+    console.log(isAdvertised?.message);
+
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/advertisingProducts?productId=${_id}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.message) {
+    //                 setAdvertisedMessage(data.message);
+    //             }
+    //         })
+    // }, [_id])
 
     if (isLoading) {
         return <Loader></Loader>
@@ -40,10 +58,21 @@ const MyProductsRow = ({ myProduct, decimal, handleDelete, handleAdvertise }) =>
                 <div className="font-bold">{resalePrice}</div>
             </td>
             <td>
-                <div className={`font-bold text-center text-black rounded-lg ${data?.message === 'alreadyBooked' ? 'bg-yellow-600' : 'bg-green-500'}`}>{data?.message === 'alreadyBooked' ? 'Booked' : 'Available'}</div>
+                <div className={`font-bold text-center text-black rounded-lg ${isOrdered?.message === 'alreadyBooked' ? 'bg-yellow-600' : 'bg-green-500'}`}>{isOrdered?.message === 'alreadyBooked' ? 'Booked' : 'Available'}</div>
             </td>
             <th>
-                <button onClick={() => handleAdvertise(myProduct)} disabled={data?.message === 'alreadyBooked'} className="btn btn-secondary btn-xs font-bold text-black">Advertise</button>
+                <button
+                    onClick={() => handleAdvertise(myProduct)}
+                    disabled={
+                        isOrdered?.message === 'alreadyBooked' || isAdvertised?.message === 'adreadyAdvertised'
+                    }
+                    className="btn btn-secondary btn-xs font-bold text-black">
+                    {
+                        isOrdered?.message === 'alreadyBooked' ? 'Already Booked' : (
+                            isAdvertised?.message === 'adreadyAdvertised' ? 'Already Advertised' : 'Make Advertise'
+                        )
+                    }
+                </button>
             </th>
         </tr>
     );

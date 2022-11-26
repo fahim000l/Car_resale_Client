@@ -81,6 +81,7 @@ const MyProducts = () => {
                             .then(data => {
                                 console.log(data);
                                 if (data.acknowledged) {
+                                    refetch();
                                     toast.success('product advertised Successfully');
                                 }
                             })

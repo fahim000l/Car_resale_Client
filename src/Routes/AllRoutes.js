@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../LayOuts/Main";
+import AllAdvertise from "../Pages/AdvertiseSection/AllAdvertise/AllAdvertise";
 import CategoryProducts from "../Pages/CategoryProducts/CategoryProducts";
 import AddProducts from "../Pages/DashBoard/AddProducts/AddProducts";
 import Dashboard from "../Pages/DashBoard/Dashboard";
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: '/categoryProducts/:id',
                 element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>
+            },
+            {
+                path: '/alladvertise',
+                element: <AllAdvertise></AllAdvertise>
             },
             {
                 path: '/signup',
