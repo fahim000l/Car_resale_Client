@@ -17,7 +17,6 @@ const CategoryProducts = () => {
         queryFn: () => fetch(`http://localhost:5000/categoryProducts/${id}`)
             .then(res => res.json())
     });
-    console.log(products);
 
     if (isLoading) {
         return <Loader></Loader>

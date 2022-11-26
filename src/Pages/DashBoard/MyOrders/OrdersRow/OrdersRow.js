@@ -26,7 +26,7 @@ const OrdersRow = ({ order, decimal }) => {
                 </div>
             </td>
             <th>
-                <button className="btn btn-error btn-xs">Pay</button>
+                <button className="btn btn-error btn-xs">pay</button>
             </th>
         </tr>
     );

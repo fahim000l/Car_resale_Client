@@ -1,24 +1,19 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
-import Loader from '../../../../CustomComponents/Loader';
+import UseAdvertisingCheck from '../../../../Hooks/UseAdvertisingCheck';
+import UseBookingCheck from '../../../../Hooks/UseBookingCheck';
 
-const MyProductsRow = ({ myProduct, decimal, handleDelete, handleAdvertise }) => {
+const MyProductsRow = ({
+    myProduct,
+    decimal,
+    handleDelete,
+    handleAdvertise,
+}) => {
 
     const { _id, picture, carName, resalePrice } = myProduct;
     // const [advertisedMessage, setAdvertisedMessage] = useState('');
 
-    const { data: isOrdered, isLoading } = useQuery({
-        queryKey: ['products', _id],
-        queryFn: () => fetch(`http://localhost:5000/products/${_id}`)
-            .then(res => res.json())
-    });
-    const { data: isAdvertised } = useQuery({
-        queryKey: ['advertisingProducts', _id],
-        queryFn: () => fetch(`http://localhost:5000/advertisingProducts?productId=${_id}`)
-            .then(res => res.json())
-    });
+    const { isOrdered } = UseBookingCheck(_id);
 
-    console.log(isAdvertised?.message);
+    const [isAdvertised, advertisingRefetch] = UseAdvertisingCheck(_id);
 
     // useEffect(() => {
     //     fetch(`http://localhost:5000/advertisingProducts?productId=${_id}`)
@@ -30,9 +25,6 @@ const MyProductsRow = ({ myProduct, decimal, handleDelete, handleAdvertise }) =>
     //         })
     // }, [_id])
 
-    if (isLoading) {
-        return <Loader></Loader>
-    }
 
     return (
         <tr>
@@ -62,9 +54,9 @@ const MyProductsRow = ({ myProduct, decimal, handleDelete, handleAdvertise }) =>
             </td>
             <th>
                 <button
-                    onClick={() => handleAdvertise(myProduct)}
+                    onClick={() => handleAdvertise(myProduct, advertisingRefetch)}
                     disabled={
-                        isOrdered?.message === 'alreadyBooked' || isAdvertised?.message === 'adreadyAdvertised'
+                        (isOrdered?.message === 'alreadyBooked') || (isAdvertised?.message === 'adreadyAdvertised')
                     }
                     className="btn btn-secondary btn-xs font-bold text-black">
                     {

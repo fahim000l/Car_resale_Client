@@ -4,6 +4,7 @@ import AllAdvertise from "../Pages/AdvertiseSection/AllAdvertise/AllAdvertise";
 import CategoryProducts from "../Pages/CategoryProducts/CategoryProducts";
 import AddProducts from "../Pages/DashBoard/AddProducts/AddProducts";
 import Dashboard from "../Pages/DashBoard/Dashboard";
+import MyBuyers from "../Pages/DashBoard/MyBuyers/MyBuyers";
 import MyOrders from "../Pages/DashBoard/MyOrders/MyOrders";
 import MyProducts from "../Pages/DashBoard/MyProducts/MyProducts";
 import WelcomeDashBoard from "../Pages/DashBoard/WlcomeDashBoard/WelcomeDashBoard";
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             {
                 path: '/dashboard',
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/myproducts',
                 element: <MyProducts></MyProducts>
+            },
+            {
+                path: '/dashboard/mybuyers',
+                element: <MyBuyers></MyBuyers>
             }
         ]
     }

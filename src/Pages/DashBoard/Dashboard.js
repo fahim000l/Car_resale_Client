@@ -26,14 +26,23 @@ const Dashboard = () => {
                     <ul className="menu p-4 w-80 text-base-content bg-violet-500">
                         {/* <!-- Sidebar content here --> */}
                         {
-                            role === 'Seller' ?
+                            role === 'admin' ?
                                 <>
-                                    <li><Link to={'/dashboard/addproducts'}>Add Product</Link></li>
-                                    <li><Link to={'/dashboard/myproducts'}>My Products</Link></li>
-                                    <li><Link to={'/dashboard'}>My Buyers</Link></li>
+                                    <li><Link to={'/dashboard/addproducts'}>All sellers</Link></li>
+                                    <li><Link to={'/dashboard/addproducts'}>All Buyers</Link></li>
+                                    <li><Link to={'/dashboard/addproducts'}>Reported Items</Link></li>
                                 </>
                                 :
-                                <li><Link to={'/dashboard/myorders'}>My Orders</Link></li>
+                                (
+                                    role === 'Seller' ?
+                                        <>
+                                            <li><Link to={'/dashboard/addproducts'}>Add Product</Link></li>
+                                            <li><Link to={'/dashboard/myproducts'}>My Products</Link></li>
+                                            <li><Link to={'/dashboard/mybuyers'}>My Buyers</Link></li>
+                                        </>
+                                        :
+                                        <li><Link to={'/dashboard/myorders'}>My Orders</Link></li>
+                                )
                         }
                     </ul>
 

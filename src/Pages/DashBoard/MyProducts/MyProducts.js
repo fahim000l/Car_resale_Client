@@ -9,7 +9,9 @@ import MyProductsRow from './MyProductsRow/MyProductsRow';
 const MyProducts = () => {
 
 
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+
+
     const { data: myProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['products', user],
         queryFn: () => fetch(`http://localhost:5000/products?email=${user?.email}`)
@@ -19,6 +21,7 @@ const MyProducts = () => {
     if (isLoading) {
         return <Loader></Loader>
     };
+
 
     const handleDelete = (deletingProduct) => {
 
@@ -35,7 +38,13 @@ const MyProducts = () => {
                             .then(res => res.json())
                             .then(data => {
                                 console.log(data);
-                                if (data.acknowledged) {
+
+
+                                if (
+                                    data.adverderDeleted.acknowledged ||
+                                    data.productDeleted.acknowledged ||
+                                    data.orderDeleted.acknowledged
+                                ) {
                                     refetch();
                                     toast.success('Item deleted successfully');
                                 }
@@ -52,7 +61,7 @@ const MyProducts = () => {
         });
     };
 
-    const handleAdvertise = (product) => {
+    const handleAdvertise = (product, advertisingRefetch) => {
 
         const { _id, picture, carName, resalePrice } = product;
 
@@ -81,7 +90,7 @@ const MyProducts = () => {
                             .then(data => {
                                 console.log(data);
                                 if (data.acknowledged) {
-                                    refetch();
+                                    advertisingRefetch();
                                     toast.success('product advertised Successfully');
                                 }
                             })

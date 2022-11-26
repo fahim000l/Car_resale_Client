@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../Contexts/AuthProvider';
+import UseBookingCheck from '../../../../Hooks/UseBookingCheck';
 
 const BookNowModal = ({ bookingProduct, setBookingProduct }) => {
 
@@ -11,6 +12,8 @@ const BookNowModal = ({ bookingProduct, setBookingProduct }) => {
         resalePrice,
         picture
     } = bookingProduct;
+
+    const { bookingCheckRefetch } = UseBookingCheck(_id)
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -48,6 +51,7 @@ const BookNowModal = ({ bookingProduct, setBookingProduct }) => {
                 if (data.acknowledged) {
                     toast.success('Your order has been confirmed');
                     setBookingProduct(null);
+                    bookingCheckRefetch();
                 }
             })
     }

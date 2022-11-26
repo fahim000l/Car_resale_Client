@@ -1,7 +1,7 @@
 import React from 'react';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
-import { useQuery } from '@tanstack/react-query';
 import Loader from '../../../CustomComponents/Loader';
+import UseBookingCheck from '../../../Hooks/UseBookingCheck';
 
 const ProductCard = ({ product, setBookingProduct }) => {
 
@@ -18,13 +18,9 @@ const ProductCard = ({ product, setBookingProduct }) => {
         picture
     } = product;
 
-    const { data, isLoading } = useQuery({
-        queryKey: ['products', _id],
-        queryFn: () => fetch(`http://localhost:5000/products/${_id}`)
-            .then(res => res.json())
-    });
+    const { isOrdered, bookingCheckLoading } = UseBookingCheck(_id)
 
-    if (isLoading) {
+    if (bookingCheckLoading) {
         return <Loader></Loader>
     }
 
@@ -47,8 +43,8 @@ const ProductCard = ({ product, setBookingProduct }) => {
                     isVerified && <CheckCircleIcon className="h-[60px] w-[60px] text-blue-600" />
                 }
             </div>
-            <button onClick={() => setBookingProduct(product)} disabled={data?.message === 'alreadyBooked'}>
-                <label htmlFor="bookNowModal" className={`btn ${data.message === 'alreadyBooked' ? 'bg-red-900' : 'bg-black'} font-bold w-full`}>{data?.message === 'alreadyBooked' ? 'Already Booked' : 'Book Now'}</label>
+            <button onClick={() => setBookingProduct(product)} disabled={isOrdered?.message === 'alreadyBooked'}>
+                <label htmlFor="bookNowModal" className={`btn ${isOrdered.message === 'alreadyBooked' ? 'bg-red-900' : 'bg-black'} font-bold w-full`}>{isOrdered?.message === 'alreadyBooked' ? 'Already Booked' : 'Book Now'}</label>
             </button>
         </div>
     );
