@@ -28,7 +28,7 @@ const Dashboard = () => {
                         {
                             role === 'admin' ?
                                 <>
-                                    <li><Link to={'/dashboard/addproducts'}>All sellers</Link></li>
+                                    <li><Link to={'/dashboard/allellers'}>All sellers</Link></li>
                                     <li><Link to={'/dashboard/addproducts'}>All Buyers</Link></li>
                                     <li><Link to={'/dashboard/addproducts'}>Reported Items</Link></li>
                                 </>
