@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 
 const useRole = (email) => {
-
     const [role, setRole] = useState('');
     const [roleLoader, setRoleLoader] = useState(true);
 

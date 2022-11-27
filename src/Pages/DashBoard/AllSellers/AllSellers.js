@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { confirmAlert } from 'react-confirm-alert';
+import toast from 'react-hot-toast';
 import Loader from '../../../CustomComponents/Loader';
 import AllSellersRow from './AllSellersRow/AllSellersRow';
 
@@ -32,6 +34,38 @@ const AllSellers = () => {
                 }
             })
 
+    };
+
+    const handleDeleteSeller = (deletingSeller) => {
+
+        confirmAlert({
+            title: 'Confirm to Delete',
+            message: "Are you sure? You want to delete this Seller's Account.",
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        fetch(`http://localhost:5000/users/${deletingSeller._id}`, {
+                            method: 'DELETE'
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                                if (data.acknowledged) {
+                                    toast.success('Seller deleted Successfully');
+                                    refetch();
+                                }
+                            })
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => {
+                        return;
+                    }
+                }
+            ]
+        });
     }
 
     return (
@@ -42,11 +76,7 @@ const AllSellers = () => {
                     {/* <!-- head --> */}
                     <thead>
                         <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </th>
+                            <th>Delete</th>
                             <th>#</th>
                             <th>Image</th>
                             <th>Seller's Name</th>
@@ -62,6 +92,7 @@ const AllSellers = () => {
                                 decimal={i}
                                 seller={seller}
                                 handleVerificationStatus={handleVerificationStatus}
+                                handleDeleteSeller={handleDeleteSeller}
                             ></AllSellersRow>)
                         }
                     </tbody>

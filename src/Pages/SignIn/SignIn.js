@@ -8,7 +8,7 @@ const SignIn = () => {
     const [error, setError] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const navigate = useNavigate();
-    const { signIn, passwordReset } = useContext(AuthContext);
+    const { signIn, passwordReset, logOut } = useContext(AuthContext);
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/'
@@ -26,13 +26,33 @@ const SignIn = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                navigate(from, { replace: true });
+                fetch(`http://localhost:5000/users?email=${user.email}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.message === 'userNotFound') {
+                            setError('This Account has been removed');
+                            logOut()
+                                .then(() => {
+                                    return;
+                                })
+                                .catch(err => {
+                                    console.error(err);
+                                })
+
+                        }
+                        else {
+                            navigate(from, { replace: true });
+                        }
+                    })
+
             })
             .catch(err => {
                 console.error(err);
                 setError(err.message);
             })
     };
+
+
 
     const resetPassword = () => {
 

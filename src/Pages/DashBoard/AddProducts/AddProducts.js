@@ -22,8 +22,8 @@ const AddProducts = () => {
         const location = form.location.value;
         const categoryName = form.categoryName.value.split('  ')[1];
         const categoryId = form.categoryName.value.split('  ')[0];
-        const sellerName = user.displayName;
-        const sellerEmail = user.email;
+        const sellerName = user?.displayName;
+        const sellerEmail = user?.email;
 
         const image = form.image.files[0];
 

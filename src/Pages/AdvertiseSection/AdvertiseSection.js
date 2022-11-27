@@ -18,6 +18,10 @@ const AdvertiseSection = () => {
 
     if (isLoading) {
         return <Loader></Loader>
+    };
+
+    if (advertises.length === 0) {
+        return;
     }
 
     return (

@@ -9,8 +9,6 @@ const Dashboard = () => {
 
     const { user } = useContext(AuthContext);
     const [role] = useRole(user?.email);
-
-    console.log(role);
     return (
         <div>
             <Header></Header>

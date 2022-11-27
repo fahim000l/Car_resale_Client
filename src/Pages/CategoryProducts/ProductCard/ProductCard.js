@@ -1,9 +1,12 @@
 import React from 'react';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import { BookmarkIcon } from '@heroicons/react/24/solid';
+import { FaNotesMedical } from 'react-icons/fa';
 import Loader from '../../../CustomComponents/Loader';
 import UseBookingCheck from '../../../Hooks/UseBookingCheck';
+import { useQuery } from '@tanstack/react-query';
 
-const ProductCard = ({ product, setBookingProduct }) => {
+const ProductCard = ({ product, setBookingProduct, handleReport }) => {
 
     const {
         _id,
@@ -14,11 +17,18 @@ const ProductCard = ({ product, setBookingProduct }) => {
         yearOfUse,
         postedTime,
         sellerName,
+        sellerEmail,
         isVerified,
         picture
     } = product;
 
-    const { isOrdered, bookingCheckLoading } = UseBookingCheck(_id)
+    const { isOrdered, bookingCheckLoading } = UseBookingCheck(_id);
+
+    const { data: seller } = useQuery({
+        queryKey: ['users', sellerEmail],
+        queryFn: () => fetch(`http://localhost:5000/users?email=${sellerEmail}`)
+            .then(res => res.json())
+    })
 
     if (bookingCheckLoading) {
         return <Loader></Loader>
@@ -26,6 +36,10 @@ const ProductCard = ({ product, setBookingProduct }) => {
 
     return (
         <div className="card card-compact shadow-xl">
+            <div className='flex items-center justify-between py-2 px-5 bg-violet-400 rounded-lg'>
+                <FaNotesMedical onClick={() => handleReport(product)} title='Report to Admin' className='w-[60px] text-4xl text-red-800 cursor-pointer' />
+                <BookmarkIcon title='Add to Bookmark' className='w-[50px] text-black cursor-pointer' />
+            </div>
             <figure><img className='w-full h-[300px]' src={picture} alt="Shoes" /></figure>
             <div className="card-body text-start text-black bg-violet-400">
                 <h2 className="card-title text-2xl font-bold">{carName}</h2>
@@ -40,7 +54,7 @@ const ProductCard = ({ product, setBookingProduct }) => {
                     <p className='text-xl text-black'>Posted Date : {postedTime}</p>
                 </div>
                 {
-                    isVerified && <CheckCircleIcon className="h-[60px] w-[60px] text-blue-600" />
+                    (isVerified || seller?.isVerified) && <CheckCircleIcon className="h-[60px] w-[60px] text-blue-600" />
                 }
             </div>
             <button onClick={() => setBookingProduct(product)} disabled={isOrdered?.message === 'alreadyBooked'}>
