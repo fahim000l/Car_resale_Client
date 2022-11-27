@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider';
 import Loader from '../../CustomComponents/Loader';
 import BookNowModal from './ProductCard/BookNowModal/BookNowModal';
 import ProductCard from './ProductCard/ProductCard';
@@ -11,6 +12,7 @@ const CategoryProducts = () => {
 
     const [bookingProduct, setBookingProduct] = useState(null);
 
+    const { user } = useContext(AuthContext)
 
     const id = useParams().id;
     console.log(id);
@@ -37,7 +39,10 @@ const CategoryProducts = () => {
             sellerEmail: product.sellerEmail,
             isVerified: product.isVerified,
             picture: product.picture,
-        }
+            reporterName: user.displayName,
+            reporterEmail: user.email
+        };
+
         confirmAlert({
             title: 'Confirm to Report',
             message: 'Are you sure? You want to report this product.',
@@ -48,7 +53,7 @@ const CategoryProducts = () => {
                         fetch(`http://localhost:5000/report`, {
                             method: 'POST',
                             headers: {
-                                'content-type': 'application.json'
+                                'content-type': 'application/json'
                             },
                             body: JSON.stringify(reportingProduct)
                         })

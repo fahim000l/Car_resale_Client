@@ -15,8 +15,7 @@ const Dashboard = () => {
             <div className="drawer drawer-mobile">
                 <input id="dashboardDrawer" type="checkbox" className="drawer-toggle" />
                 <div data-theme="dark" className="drawer-content flex flex-col">
-                    {/* <!-- Page content here --> */}
-                    {/* <label htmlFor="dashboardDrawer" className="btn btn-primary drawer-button lg:hidden">Open drawer</label> */}
+
                     <Outlet></Outlet>
                 </div>
                 <div className="drawer-side">
@@ -26,20 +25,20 @@ const Dashboard = () => {
                         {
                             role === 'admin' ?
                                 <>
-                                    <li><Link to={'/dashboard/allellers'}>All sellers</Link></li>
-                                    <li><Link to={'/dashboard/addproducts'}>All Buyers</Link></li>
-                                    <li><Link to={'/dashboard/addproducts'}>Reported Items</Link></li>
+                                    <li><Link to={'/dashboard/allellers'} className='text-black font-bold'>All sellers</Link></li>
+                                    <li><Link to={'/dashboard/addproducts'} className='text-black font-bold'>All Buyers</Link></li>
+                                    <li><Link to={'/dashboard/reportedproducts'} className='text-black font-bold'>Reported Products</Link></li>
                                 </>
                                 :
                                 (
                                     role === 'Seller' ?
                                         <>
-                                            <li><Link to={'/dashboard/addproducts'}>Add Product</Link></li>
-                                            <li><Link to={'/dashboard/myproducts'}>My Products</Link></li>
-                                            <li><Link to={'/dashboard/mybuyers'}>My Buyers</Link></li>
+                                            <li><Link to={'/dashboard/addproducts'} className='text-black font-bold'>Add Product</Link></li>
+                                            <li><Link to={'/dashboard/myproducts'} className='text-black font-bold'>My Products</Link></li>
+                                            <li><Link to={'/dashboard/mybuyers'} className='text-black font-bold'>My Buyers</Link></li>
                                         </>
                                         :
-                                        <li><Link to={'/dashboard/myorders'}>My Orders</Link></li>
+                                        <li><Link to={'/dashboard/myorders'} className='text-black font-bold'>My Orders</Link></li>
                                 )
                         }
                     </ul>
