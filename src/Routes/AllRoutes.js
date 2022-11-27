@@ -13,6 +13,7 @@ import WelcomeDashBoard from "../Pages/DashBoard/WlcomeDashBoard/WelcomeDashBoar
 import Home from "../Pages/Home";
 import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
+import ErrorPage from "../Shared/ErrorPage/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 
 
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
@@ -46,6 +48,7 @@ const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/dashboard',

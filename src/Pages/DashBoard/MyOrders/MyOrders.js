@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import Loader from '../../../CustomComponents/Loader';
 import OrdersRow from './OrdersRow/OrdersRow';
+import PaymentModal from './OrdersRow/PaymentModal/PaymentModal';
 
 const MyOrders = () => {
 
     const { user } = useContext(AuthContext);
+    const [payingProduct, setPayingProduct] = useState(null);
 
     const { data: orders = [], isLoading } = useQuery({
         queryKey: ['orders', user],
@@ -28,7 +30,7 @@ const MyOrders = () => {
                         <tr>
                             <th>#</th>
                             <th>Image</th>
-                            <th>Title</th>
+                            <th>Name</th>
                             <th>Price</th>
                             <th>Action</th>
                         </tr>
@@ -40,11 +42,19 @@ const MyOrders = () => {
                                 key={order._id}
                                 decimal={i}
                                 order={order}
+                                setPayingProduct={setPayingProduct}
                             ></OrdersRow>)
                         }
                     </tbody>
                 </table>
             </div>
+            {
+                payingProduct &&
+                <PaymentModal
+                    setPayingProduct={setPayingProduct}
+                    payingProduct={payingProduct}
+                ></PaymentModal>
+            }
         </div>
     );
 };

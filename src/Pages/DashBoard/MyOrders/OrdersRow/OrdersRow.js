@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OrdersRow = ({ order, decimal }) => {
+const OrdersRow = ({ order, decimal, setPayingProduct }) => {
 
     const { productName, picture, price } = order;
     return (
@@ -26,9 +26,11 @@ const OrdersRow = ({ order, decimal }) => {
                 </div>
             </td>
             <th>
-                <button className="btn btn-error btn-xs">pay</button>
+                <button onClick={() => setPayingProduct(order)}>
+                    <label className="btn btn-error btn-xs" htmlFor="paymentModal">pay</label>
+                </button>
             </th>
-        </tr>
+        </tr >
     );
 };
 

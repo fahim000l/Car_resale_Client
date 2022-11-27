@@ -36,9 +36,9 @@ const ProductCard = ({ product, setBookingProduct, handleReport }) => {
 
     return (
         <div className="card card-compact shadow-xl">
-            <div className='flex items-center justify-between py-2 px-5 bg-violet-400 rounded-lg'>
-                <FaNotesMedical onClick={() => handleReport(product)} title='Report to Admin' className='w-[60px] text-4xl text-red-800 cursor-pointer' />
-                <BookmarkIcon title='Add to Bookmark' className='w-[50px] text-black cursor-pointer' />
+            <div onClick={() => handleReport(product)} className='flex items-center justify-evenly py-2 px-5 bg-violet-400 rounded-lg cursor-pointer'>
+                <FaNotesMedical title='Report to Admin' className='w-[60px] text-4xl text-red-800' />
+                <p className='font-bold text-2xl text-red-800'>Report to Admin</p>
             </div>
             <figure><img className='w-full h-[300px]' src={picture} alt="Shoes" /></figure>
             <div className="card-body text-start text-black bg-violet-400">

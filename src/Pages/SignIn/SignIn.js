@@ -4,6 +4,7 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 
 const SignIn = () => {
 
+    const [logedinUserEmail, setLogedinUserEmail] = useState('');
 
     const [error, setError] = useState('');
     const [userEmail, setUserEmail] = useState('');
@@ -20,7 +21,6 @@ const SignIn = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
 
         signIn(email, password)
             .then(result => {
@@ -41,7 +41,9 @@ const SignIn = () => {
 
                         }
                         else {
-                            navigate(from, { replace: true });
+                            // navigate(from, { replace: true });
+                            setLogedinUserEmail(user?.email);
+                            console.log(logedinUserEmail)
                         }
                     })
 
