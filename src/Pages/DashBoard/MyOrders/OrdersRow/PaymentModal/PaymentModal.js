@@ -51,7 +51,7 @@ const PaymentModal = ({ payingProduct, setPayingProduct }) => {
                         <h3 className="font-bold text-start text-white lg:text-3xl">Payment Info</h3>
                         <div className='mt-2 w-full'>
                             <Elements stripe={stripePromise}>
-                                <CheckOutForm payingProduct={payingProduct} />
+                                <CheckOutForm payingProduct={payingProduct} setPayingProduct={setPayingProduct} />
                             </Elements>
                         </div>
                     </div>

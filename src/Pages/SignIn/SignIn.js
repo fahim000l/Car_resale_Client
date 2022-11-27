@@ -4,8 +4,6 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 
 const SignIn = () => {
 
-    const [logedinUserEmail, setLogedinUserEmail] = useState('');
-
     const [error, setError] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const navigate = useNavigate();
@@ -41,9 +39,7 @@ const SignIn = () => {
 
                         }
                         else {
-                            // navigate(from, { replace: true });
-                            setLogedinUserEmail(user?.email);
-                            console.log(logedinUserEmail)
+                            navigate(from, { replace: true });
                         }
                     })
 

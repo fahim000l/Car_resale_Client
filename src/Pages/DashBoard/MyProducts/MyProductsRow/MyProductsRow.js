@@ -1,5 +1,6 @@
 import UseAdvertisingCheck from '../../../../Hooks/UseAdvertisingCheck';
 import UseBookingCheck from '../../../../Hooks/UseBookingCheck';
+import UsePaidCheck from '../../../../Hooks/UsePaidCheck';
 
 const MyProductsRow = ({
     myProduct,
@@ -15,6 +16,7 @@ const MyProductsRow = ({
 
     const [isAdvertised, advertisingRefetch] = UseAdvertisingCheck(_id);
 
+    const { isPaid } = UsePaidCheck(_id);
     // useEffect(() => {
     //     fetch(`http://localhost:5000/advertisingProducts?productId=${_id}`)
     //         .then(res => res.json())
@@ -50,18 +52,22 @@ const MyProductsRow = ({
                 <div className="font-bold">{resalePrice}</div>
             </td>
             <td>
-                <div className={`font-bold text-center text-black rounded-lg ${isOrdered?.message === 'alreadyBooked' ? 'bg-yellow-600' : 'bg-green-500'}`}>{isOrdered?.message === 'alreadyBooked' ? 'Booked' : 'Available'}</div>
+                <div className={`font-bold text-center text-black rounded-lg ${isPaid?.message === 'paid' ? 'bg-red-600' : (isOrdered?.message === 'alreadyBooked' ? 'bg-yellow-600' : 'bg-green-500')}`}>{isPaid?.message === 'paid' ? 'Sold' : (isOrdered?.message === 'alreadyBooked' ? 'Booked' : 'Available')}</div>
+                {/* <div className={`font-bold text-center text-black rounded-lg ${isOrdered?.message === 'alreadyBooked' ? 'bg-yellow-600' : 'bg-green-500'}`}>{isOrdered?.message === 'alreadyBooked' ? 'Booked' : 'Available'}</div> */}
             </td>
             <th>
                 <button
                     onClick={() => handleAdvertise(myProduct, advertisingRefetch)}
                     disabled={
-                        (isOrdered?.message === 'alreadyBooked') || (isAdvertised?.message === 'adreadyAdvertised')
+                        (isOrdered?.message === 'alreadyBooked') || (isAdvertised?.message === 'adreadyAdvertised') ||
+                        (isPaid?.message === 'paid')
                     }
                     className="btn btn-secondary btn-xs font-bold text-black">
                     {
                         isOrdered?.message === 'alreadyBooked' ? 'Already Booked' : (
-                            isAdvertised?.message === 'adreadyAdvertised' ? 'Already Advertised' : 'Make Advertise'
+                            isAdvertised?.message === 'adreadyAdvertised' ? 'Already Advertised' : (
+                                isPaid?.message === 'paid' ? 'Already Sold' : 'Make Advertise'
+                            )
                         )
                     }
                 </button>

@@ -1,8 +1,19 @@
 import React from 'react';
+import Loader from '../../../../CustomComponents/Loader';
+import UsePaidCheck from '../../../../Hooks/UsePaidCheck';
 
 const OrdersRow = ({ order, decimal, setPayingProduct }) => {
 
-    const { productName, picture, price } = order;
+
+
+    const { productName, picture, price, productId } = order;
+
+    const { isPaid, paidLoading } = UsePaidCheck(productId);
+
+    if (paidLoading) {
+        return <Loader></Loader>
+    }
+
     return (
         <tr>
             <th>{decimal + 1}</th>
@@ -26,8 +37,13 @@ const OrdersRow = ({ order, decimal, setPayingProduct }) => {
                 </div>
             </td>
             <th>
-                <button onClick={() => setPayingProduct(order)}>
-                    <label className="btn btn-error btn-xs" htmlFor="paymentModal">pay</label>
+                <button onClick={() => setPayingProduct(order)} disabled={isPaid?.message === 'paid'}>
+                    <label className={`btn ${isPaid?.message === 'paid' ? 'btn-success' : 'btn-error'} btn-xs`} htmlFor="paymentModal">{
+                        isPaid?.message === 'paid' ?
+                            'paid'
+                            :
+                            'pay'
+                    }</label>
                 </button>
             </th>
         </tr >

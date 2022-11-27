@@ -1,6 +1,7 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import UsePaidCheck from '../../../../../../Hooks/UsePaidCheck';
 
 const CheckOutForm = ({ payingProduct, setPayingProduct }) => {
 
@@ -11,7 +12,10 @@ const CheckOutForm = ({ payingProduct, setPayingProduct }) => {
     const elements = useElements();
 
 
+
     const { productName, picture, price, clientName, clientEmail, productId, _id } = payingProduct;
+
+    const { paidRefetch } = UsePaidCheck(productId);
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
@@ -96,13 +100,11 @@ const CheckOutForm = ({ payingProduct, setPayingProduct }) => {
                 .then(data => {
                     console.log(data);
                     if (data.insertedId) {
-                        // setSuccess('Congrats! your payment completed');
-                        // setTransactionId(paymentIntent.id);
                         setPayingProduct(null);
-                        Swal.fire(
-                            'Payment Successful!'
-                                `Transaction Id: ${paymentIntent.id}`
-                        )
+                        Swal.fire('Payment Successful',
+                            `Transaction Id: ${paymentIntent.id}`
+                        );
+                        paidRefetch();
                     }
                 })
         }
