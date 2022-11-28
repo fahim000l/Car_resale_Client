@@ -9,7 +9,11 @@ const AllSellers = () => {
 
     const { data: sellers = [], isLoading, refetch } = useQuery({
         queryKey: ['users'],
-        queryFn: () => fetch('http://localhost:5000/users?role=seller')
+        queryFn: () => fetch('http://localhost:5000/users?role=seller', {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('resale token')}`
+            }
+        })
             .then(res => res.json())
     });
 
@@ -22,7 +26,8 @@ const AllSellers = () => {
         fetch(`http://localhost:5000/users/${seller._id}`, {
             method: 'PUT',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('resale token')}`
             },
             body: JSON.stringify(seller)
         })
@@ -46,7 +51,10 @@ const AllSellers = () => {
                     label: 'Yes',
                     onClick: () => {
                         fetch(`http://localhost:5000/users/${deletingSeller._id}`, {
-                            method: 'DELETE'
+                            method: 'DELETE',
+                            headers: {
+                                authorization: `bearer ${localStorage.getItem('resale token')}`
+                            }
                         })
                             .then(res => res.json())
                             .then(data => {

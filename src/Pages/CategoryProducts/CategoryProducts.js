@@ -18,7 +18,11 @@ const CategoryProducts = () => {
     console.log(id);
     const { data: products = [], isLoading } = useQuery({
         queryKey: ['categoryProducts', id],
-        queryFn: () => fetch(`http://localhost:5000/categoryProducts/${id}`)
+        queryFn: () => fetch(`http://localhost:5000/categoryProducts/${id}`, {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('resale token')}`
+            }
+        })
             .then(res => res.json())
     });
 
@@ -53,7 +57,8 @@ const CategoryProducts = () => {
                         fetch(`http://localhost:5000/report`, {
                             method: 'POST',
                             headers: {
-                                'content-type': 'application/json'
+                                'content-type': 'application/json',
+                                authorization: `bearer ${localStorage.getItem('resale token')}`
                             },
                             body: JSON.stringify(reportingProduct)
                         })

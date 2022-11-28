@@ -6,7 +6,11 @@ const useRole = (email) => {
 
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/users?email=${email}`)
+            fetch(`http://localhost:5000/users?email=${email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('resale token')}`
+                }
+            })
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);

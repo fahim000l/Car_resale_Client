@@ -14,7 +14,11 @@ const MyProducts = () => {
 
     const { data: myProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['products', user],
-        queryFn: () => fetch(`http://localhost:5000/products?email=${user?.email}`)
+        queryFn: () => fetch(`http://localhost:5000/products?email=${user?.email}`, {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('resale token')}`
+            }
+        })
             .then(res => res.json())
     });
 
@@ -33,7 +37,10 @@ const MyProducts = () => {
                     label: 'Yes',
                     onClick: () => {
                         fetch(`http://localhost:5000/products/${deletingProduct._id}`, {
-                            method: 'DELETE'
+                            method: 'DELETE',
+                            headers: {
+                                authorization: `bearer ${localStorage.getItem('resale token')}`
+                            }
                         })
                             .then(res => res.json())
                             .then(data => {
@@ -82,7 +89,8 @@ const MyProducts = () => {
                         fetch(`http://localhost:5000/advertisingProducts`, {
                             method: 'POST',
                             headers: {
-                                'content-type': 'application/json'
+                                'content-type': 'application/json',
+                                authorization: `bearer ${localStorage.getItem('resale token')}`
                             },
                             body: JSON.stringify(advertisingProduct)
                         })

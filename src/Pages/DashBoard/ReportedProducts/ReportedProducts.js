@@ -9,7 +9,11 @@ const ReportedProducts = () => {
 
     const { data: reports = [], isLoading, refetch } = useQuery({
         queryKey: ['reports'],
-        queryFn: () => fetch(`http://localhost:5000/reports`)
+        queryFn: () => fetch(`http://localhost:5000/reports`, {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('resale token')}`
+            }
+        })
             .then(res => res.json())
     });
 
@@ -27,7 +31,10 @@ const ReportedProducts = () => {
                     label: 'Yes',
                     onClick: () => {
                         fetch(`http://localhost:5000/products/${product.productId}`, {
-                            method: 'DELETE'
+                            method: 'DELETE',
+                            headers: {
+                                authorization: `bearer ${localStorage.getItem('resale token')}`
+                            }
                         })
                             .then(res => res.json())
                             .then(data => {

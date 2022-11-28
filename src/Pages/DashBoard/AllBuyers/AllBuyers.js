@@ -9,7 +9,11 @@ const AllBuyers = () => {
 
     const { data: buyers = [], isLoading, refetch } = useQuery({
         queryKey: ['users'],
-        queryFn: () => fetch('http://localhost:5000/users?role=buyer')
+        queryFn: () => fetch('http://localhost:5000/users?role=buyer', {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('resale token')}`
+            }
+        })
             .then(res => res.json())
     });
 
@@ -26,8 +30,11 @@ const AllBuyers = () => {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        fetch(`http://localhost:5000/allbuyers/${deletingBuyer._id}`, {
-                            method: 'DELETE'
+                        fetch(`http://localhost:5000/users/${deletingBuyer._id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                authorization: `bearer ${localStorage.getItem('resale token')}`
+                            }
                         })
                             .then(res => res.json())
                             .then(data => {
