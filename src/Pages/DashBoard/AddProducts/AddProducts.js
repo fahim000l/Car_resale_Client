@@ -53,7 +53,7 @@ const AddProducts = () => {
                     sellerEmail
                 };
 
-                fetch(`http://localhost:5000/addproduct`, {
+                fetch(`https://resaledotcom-server.vercel.app/addproduct`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',

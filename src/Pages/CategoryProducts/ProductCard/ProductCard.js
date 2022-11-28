@@ -25,7 +25,7 @@ const ProductCard = ({ product, setBookingProduct, handleReport }) => {
 
     const { data: seller } = useQuery({
         queryKey: ['users', sellerEmail],
-        queryFn: () => fetch(`http://localhost:5000/users?email=${sellerEmail}`)
+        queryFn: () => fetch(`https://resaledotcom-server.vercel.app/users?email=${sellerEmail}`)
             .then(res => res.json())
     })
 

@@ -6,7 +6,7 @@ const useRole = (email) => {
 
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/users?email=${email}`, {
+            fetch(`https://resaledotcom-server.vercel.app/users?email=${email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('resale token')}`
                 }

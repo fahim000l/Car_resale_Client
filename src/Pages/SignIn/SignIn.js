@@ -34,7 +34,7 @@ const SignIn = () => {
                 const user = result.user;
                 console.log(user);
 
-                fetch(`http://localhost:5000/users?email=${user.email}`)
+                fetch(`https://resaledotcom-server.vercel.app/users?email=${user.email}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data.message === 'userNotFound') {

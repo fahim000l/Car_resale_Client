@@ -9,7 +9,7 @@ const ReportedProducts = () => {
 
     const { data: reports = [], isLoading, refetch } = useQuery({
         queryKey: ['reports'],
-        queryFn: () => fetch(`http://localhost:5000/reports`, {
+        queryFn: () => fetch(`https://resaledotcom-server.vercel.app/reports`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('resale token')}`
             }
@@ -22,7 +22,7 @@ const ReportedProducts = () => {
     };
 
     const handleDeleteProduct = (product) => {
-        // fetch(`http://localhost:5000/products/${product.}`)
+        // fetch(`https://resaledotcom-server.vercel.app/products/${product.}`)
         confirmAlert({
             title: 'Confirm to Delete',
             message: 'Are you sure? You want to delete this product.',
@@ -30,7 +30,7 @@ const ReportedProducts = () => {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        fetch(`http://localhost:5000/products/${product.productId}`, {
+                        fetch(`https://resaledotcom-server.vercel.app/products/${product.productId}`, {
                             method: 'DELETE',
                             headers: {
                                 authorization: `bearer ${localStorage.getItem('resale token')}`

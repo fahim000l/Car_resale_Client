@@ -86,7 +86,7 @@ const SignUp = () => {
     }
 
     const saveUserToDb = (userInfo) => {
-        fetch('http://localhost:5000/users', {
+        fetch('https://resaledotcom-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

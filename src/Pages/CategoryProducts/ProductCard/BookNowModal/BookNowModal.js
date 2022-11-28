@@ -38,7 +38,7 @@ const BookNowModal = ({ bookingProduct, setBookingProduct }) => {
             productId
         };
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://resaledotcom-server.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

@@ -5,7 +5,7 @@ const UsePaidCheck = (productId) => {
 
     const { data: isPaid, isLoading: paidLoading, refetch: paidRefetch } = useQuery({
         queryKey: ['paidproducts', productId],
-        queryFn: () => fetch(`http://localhost:5000/paidproducts?productId=${productId}`)
+        queryFn: () => fetch(`https://resaledotcom-server.vercel.app/paidproducts?productId=${productId}`)
             .then(res => res.json())
     });
 

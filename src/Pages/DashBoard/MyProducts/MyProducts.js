@@ -14,7 +14,7 @@ const MyProducts = () => {
 
     const { data: myProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['products', user],
-        queryFn: () => fetch(`http://localhost:5000/products?email=${user?.email}`, {
+        queryFn: () => fetch(`https://resaledotcom-server.vercel.app/products?email=${user?.email}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('resale token')}`
             }
@@ -36,7 +36,7 @@ const MyProducts = () => {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        fetch(`http://localhost:5000/products/${deletingProduct._id}`, {
+                        fetch(`https://resaledotcom-server.vercel.app/products/${deletingProduct._id}`, {
                             method: 'DELETE',
                             headers: {
                                 authorization: `bearer ${localStorage.getItem('resale token')}`
@@ -86,7 +86,7 @@ const MyProducts = () => {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        fetch(`http://localhost:5000/advertisingProducts`, {
+                        fetch(`https://resaledotcom-server.vercel.app/advertisingProducts`, {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json',

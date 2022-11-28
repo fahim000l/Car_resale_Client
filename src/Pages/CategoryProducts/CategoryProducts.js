@@ -18,7 +18,7 @@ const CategoryProducts = () => {
     console.log(id);
     const { data: products = [], isLoading } = useQuery({
         queryKey: ['categoryProducts', id],
-        queryFn: () => fetch(`http://localhost:5000/categoryProducts/${id}`, {
+        queryFn: () => fetch(`https://resaledotcom-server.vercel.app/categoryProducts/${id}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('resale token')}`
             }
@@ -54,7 +54,7 @@ const CategoryProducts = () => {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        fetch(`http://localhost:5000/report`, {
+                        fetch(`https://resaledotcom-server.vercel.app/report`, {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json',

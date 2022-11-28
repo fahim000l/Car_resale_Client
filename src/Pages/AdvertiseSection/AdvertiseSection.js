@@ -12,7 +12,7 @@ const AdvertiseSection = () => {
 
     const { data: advertises = [], isLoading } = useQuery({
         queryKey: ['advertisingProducts'],
-        queryFn: () => fetch('http://localhost:5000/advertisingProducts?limit=3')
+        queryFn: () => fetch('https://resaledotcom-server.vercel.app/advertisingProducts?limit=3')
             .then(res => res.json())
     });
 

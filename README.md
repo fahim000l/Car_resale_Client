@@ -18,7 +18,8 @@ Features:
 # Sellers user can add products , See all their Products
 
 
-
+Admin Email: mdfahimfaisal000@gmail.com
+Admin Password : 121522000
 
 
 

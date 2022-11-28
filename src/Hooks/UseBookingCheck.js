@@ -4,7 +4,7 @@ const UseBookingCheck = (productId) => {
 
     const { data: isOrdered, refetch: bookingCheckRefetch, isLoading: bookingCheckLoading } = useQuery({
         queryKey: ['products', productId],
-        queryFn: () => fetch(`http://localhost:5000/products/${productId}`, {
+        queryFn: () => fetch(`https://resaledotcom-server.vercel.app/products/${productId}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('resale token')}`
             }

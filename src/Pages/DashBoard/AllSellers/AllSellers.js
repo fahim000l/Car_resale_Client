@@ -9,7 +9,7 @@ const AllSellers = () => {
 
     const { data: sellers = [], isLoading, refetch } = useQuery({
         queryKey: ['users'],
-        queryFn: () => fetch('http://localhost:5000/users?role=seller', {
+        queryFn: () => fetch('https://resaledotcom-server.vercel.app/users?role=seller', {
             headers: {
                 authorization: `bearer ${localStorage.getItem('resale token')}`
             }
@@ -23,7 +23,7 @@ const AllSellers = () => {
     }
 
     const handleVerificationStatus = (seller) => {
-        fetch(`http://localhost:5000/users/${seller._id}`, {
+        fetch(`https://resaledotcom-server.vercel.app/users/${seller._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
@@ -50,7 +50,7 @@ const AllSellers = () => {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        fetch(`http://localhost:5000/users/${deletingSeller._id}`, {
+                        fetch(`https://resaledotcom-server.vercel.app/users/${deletingSeller._id}`, {
                             method: 'DELETE',
                             headers: {
                                 authorization: `bearer ${localStorage.getItem('resale token')}`
