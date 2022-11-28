@@ -4,7 +4,7 @@ import { AuthContext } from '../Contexts/AuthProvider';
 import Loader from '../CustomComponents/Loader';
 import useRole from '../Hooks/UseRole';
 
-const AdminRoute = ({ children }) => {
+const SellerRoute = ({ children }) => {
     const { user, loader } = useContext(AuthContext);
     const location = useLocation();
 
@@ -23,4 +23,4 @@ const AdminRoute = ({ children }) => {
     }
 };
 
-export default AdminRoute;
+export default SellerRoute;

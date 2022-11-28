@@ -1,3 +1,40 @@
+Project Name :Used Product Resale Market Assignment
+Product Title : Care Resale
+
+Features:
+
+# In Frontend we used React-router-dom, firebase authenticationand hosting, React queries
+
+# In backend we used Express, MongoDb , JWT, Dotenv
+
+# User can signin with Email/Password and google and signup with only Email.Password
+
+# User can create account as Buyers, sellers and Admin
+
+# Buyer user can make orders and can see their orders in dashboard 
+
+# Admin users can see all sellers, All Buyers and Reported Products in their dashboard 
+
+# Sellers user can add products , See all their Products
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

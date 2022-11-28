@@ -10,9 +10,6 @@ const AdvertiseCard = ({ advertise }) => {
             <div className="card-body">
                 <h2 className="card-title text-5xl font-bold text-yellow-500">{carName}</h2>
                 <p className='text-start text-3xl font-bold text-yellow-500'>Price : ${resalePrice}</p>
-                <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Show Details</button>
-                </div>
             </div>
         </div>
     );

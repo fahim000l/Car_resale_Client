@@ -6,7 +6,6 @@ import AddProducts from "../Pages/DashBoard/AddProducts/AddProducts";
 import AllBuyers from "../Pages/DashBoard/AllBuyers/AllBuyers";
 import AllSellers from "../Pages/DashBoard/AllSellers/AllSellers";
 import Dashboard from "../Pages/DashBoard/Dashboard";
-import MyBuyers from "../Pages/DashBoard/MyBuyers/MyBuyers";
 import MyOrders from "../Pages/DashBoard/MyOrders/MyOrders";
 import MyProducts from "../Pages/DashBoard/MyProducts/MyProducts";
 import ReportedProducts from "../Pages/DashBoard/ReportedProducts/ReportedProducts";
@@ -15,7 +14,12 @@ import Home from "../Pages/Home";
 import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import ErrorPage from "../Shared/ErrorPage/ErrorPage";
+import AdminRoute from "./AdminRoute";
+import Error404Page from "./ErroePage/Error404Page";
 import PrivateRoute from "./PrivateRoute";
+import SellerRoute from "./SellerRoute";
+import Blog from "../Pages/Blog/Blog";
+
 
 
 const router = createBrowserRouter([
@@ -43,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path: '/signin',
                 element: <SignIn></SignIn>
+            },
+            {
+                path: '/blog',
+                elements: <Blog></Blog>
             }
         ]
     },
@@ -57,33 +65,33 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/myorders',
-                element: <MyOrders></MyOrders>
+                element: <PrivateRoute><MyOrders></MyOrders></PrivateRoute>
             },
             {
                 path: '/dashboard/addproducts',
-                element: <AddProducts></AddProducts>
+                element: <SellerRoute><AddProducts></AddProducts></SellerRoute>
             },
             {
                 path: '/dashboard/myproducts',
-                element: <MyProducts></MyProducts>
-            },
-            {
-                path: '/dashboard/mybuyers',
-                element: <MyBuyers></MyBuyers>
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
             },
             {
                 path: '/dashboard/allellers',
-                element: <AllSellers></AllSellers>
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
             {
                 path: '/dashboard/reportedproducts',
-                element: <ReportedProducts></ReportedProducts>
+                element: <AdminRoute><ReportedProducts></ReportedProducts></AdminRoute>
             },
             {
                 path: '/dashboard/allbuyers',
-                element: <AllBuyers></AllBuyers>
+                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
             }
         ]
+    },
+    {
+        path: '*',
+        element: <Error404Page></Error404Page>
     }
 ]);
 

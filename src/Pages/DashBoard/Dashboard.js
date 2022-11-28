@@ -35,7 +35,6 @@ const Dashboard = () => {
                                         <>
                                             <li><Link to={'/dashboard/addproducts'} className='text-black font-bold'>Add Product</Link></li>
                                             <li><Link to={'/dashboard/myproducts'} className='text-black font-bold'>My Products</Link></li>
-                                            <li><Link to={'/dashboard/mybuyers'} className='text-black font-bold'>My Buyers</Link></li>
                                         </>
                                         :
                                         <li><Link to={'/dashboard/myorders'} className='text-black font-bold'>My Orders</Link></li>
