@@ -1,6 +1,5 @@
 import React from 'react';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
-import { BookmarkIcon } from '@heroicons/react/24/solid';
 import { FaNotesMedical } from 'react-icons/fa';
 import Loader from '../../../CustomComponents/Loader';
 import UseBookingCheck from '../../../Hooks/UseBookingCheck';

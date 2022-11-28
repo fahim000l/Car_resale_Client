@@ -18,7 +18,6 @@ const CheckOutForm = ({ payingProduct, setPayingProduct }) => {
     const { paidRefetch } = UsePaidCheck(productId);
 
     useEffect(() => {
-        // Create PaymentIntent as soon as the page loads
         fetch("http://localhost:5000/create-payment-intent", {
             method: "POST",
             headers: {
@@ -77,7 +76,6 @@ const CheckOutForm = ({ payingProduct, setPayingProduct }) => {
         }
         if (paymentIntent.status === "succeeded") {
             console.log('card info', card);
-            // store payment info in the database
             const payment = {
                 price,
                 transactionId: paymentIntent.id,
@@ -92,7 +90,6 @@ const CheckOutForm = ({ payingProduct, setPayingProduct }) => {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
-                    // authorization: `bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: JSON.stringify(payment)
             })

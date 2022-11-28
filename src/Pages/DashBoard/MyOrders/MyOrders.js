@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
+import { confirmAlert } from 'react-confirm-alert';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import Loader from '../../../CustomComponents/Loader';
 import OrdersRow from './OrdersRow/OrdersRow';
@@ -10,11 +12,46 @@ const MyOrders = () => {
     const { user } = useContext(AuthContext);
     const [payingProduct, setPayingProduct] = useState(null);
 
-    const { data: orders = [], isLoading } = useQuery({
+
+    const { data: orders = [], isLoading, refetch } = useQuery({
         queryKey: ['orders', user],
         queryFn: () => fetch(`http://localhost:5000/orders?email=${user?.email}`)
             .then(res => res.json())
     });
+
+
+    const handleDeleteOrder = (deletingOrder, bookingCheckRefetch) => {
+        confirmAlert({
+            title: 'Confirm to Cancel',
+            message: "Are you sure? You want to cancel this Order.",
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        fetch(`http://localhost:5000/orders/${deletingOrder._id}`, {
+                            method: 'DELETE'
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                                if (data.acknowledged) {
+                                    toast.success('Order cancelled');
+                                    bookingCheckRefetch();
+                                    refetch();
+                                }
+                            })
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => {
+                        return;
+                    }
+                }
+            ]
+        });
+    }
+
 
     if (isLoading) {
         return <Loader></Loader>
@@ -28,6 +65,7 @@ const MyOrders = () => {
                     {/* <!-- head --> */}
                     <thead>
                         <tr>
+                            <th>Delete</th>
                             <th>#</th>
                             <th>Image</th>
                             <th>Name</th>
@@ -43,6 +81,7 @@ const MyOrders = () => {
                                 decimal={i}
                                 order={order}
                                 setPayingProduct={setPayingProduct}
+                                handleDeleteOrder={handleDeleteOrder}
                             ></OrdersRow>)
                         }
                     </tbody>

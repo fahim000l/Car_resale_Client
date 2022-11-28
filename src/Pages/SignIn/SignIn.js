@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
+import UseToken from '../../Hooks/UseToken';
 
 const SignIn = () => {
 
@@ -10,8 +11,16 @@ const SignIn = () => {
     const { signIn, passwordReset, logOut } = useContext(AuthContext);
     const location = useLocation();
 
+
+    const [logedInUserEmail, setLogedInUserEmail] = useState('');
+    const [token] = UseToken(logedInUserEmail);
+
+
     const from = location.state?.from?.pathname || '/'
 
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
     const handleSignIn = (event) => {
         event.preventDefault();
@@ -24,6 +33,7 @@ const SignIn = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+
                 fetch(`http://localhost:5000/users?email=${user.email}`)
                     .then(res => res.json())
                     .then(data => {
@@ -39,7 +49,8 @@ const SignIn = () => {
 
                         }
                         else {
-                            navigate(from, { replace: true });
+
+                            setLogedInUserEmail(user.email);
                         }
                     })
 

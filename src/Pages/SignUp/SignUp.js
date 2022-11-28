@@ -2,15 +2,25 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Contexts/AuthProvider';
+import UseToken from '../../Hooks/UseToken';
 
 const SignUp = () => {
 
     const imageBBSecret = process.env.REACT_APP_image_bb_secret;
 
+    const [signedUpuserEmail, setSignedUpUserEmail] = useState('')
+    const [token] = UseToken(signedUpuserEmail);
+
+
     const { createUser, googleSignIn, updateUserProfile } = useContext(AuthContext);
 
     const [error, setError] = useState('');
     const navigate = useNavigate();
+
+    if (token) {
+        Swal.fire('Your account has been created successfully');
+        navigate('/');
+    }
 
     const handleSignUp = (event) => {
         event.preventDefault();
@@ -87,8 +97,8 @@ const SignUp = () => {
             .then(data => {
                 console.log(data);
                 if (data.acknowledged) {
-                    Swal.fire('Your account has been created successfully');
-                    navigate('/');
+                    setSignedUpUserEmail(userInfo.email);
+
                 }
             })
     };
